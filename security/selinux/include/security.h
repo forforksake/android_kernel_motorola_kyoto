@@ -227,6 +227,13 @@ struct extended_perms {
 };
 
 /* definitions of av_decision.flags */
+<<<<<<< HEAD
+=======
+// [ SEC_SELINUX_PORTING_COMMON
+#ifdef CONFIG_SECURITY_SELINUX_ALWAYS_ENFORCE
+#define AVD_FLAGS_PERMISSIVE	0x0000
+#else
+>>>>>>> 5ba8cecbe... selinux: togglable selinux status
 #define AVD_FLAGS_PERMISSIVE	0x0001
 
 void security_compute_av(struct selinux_state *state,

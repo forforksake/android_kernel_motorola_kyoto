@@ -109,7 +109,20 @@ static int selinux_enforcing_boot;
 static int __init enforcing_setup(char *str)
 {
 	unsigned long enforcing;
+<<<<<<< HEAD
 	if (!kstrtoul(str, 0, &enforcing))
+=======
+	if (!kstrtoul(str, 0, &enforcing)) {
+// [ SEC_SELINUX_PORTING_COMMON
+#ifdef CONFIG_SECURITY_SELINUX_ALWAYS_ENFORCE
+		selinux_enforcing = 1;
+		selinux_enforcing_boot = 1;
+#elif defined(CONFIG_SECURITY_SELINUX_ALWAYS_PERMISSIVE)
+		selinux_enforcing = 0;
+		selinux_enforcing_boot = 0;
+#else
+		selinux_enforcing = enforcing ? 1 : 0;
+>>>>>>> 5ba8cecbe... selinux: togglable selinux status
 		selinux_enforcing_boot = enforcing ? 1 : 0;
 	return 1;
 }
@@ -125,6 +138,13 @@ static int __init selinux_enabled_setup(char *str)
 {
 	unsigned long enabled;
 	if (!kstrtoul(str, 0, &enabled))
+<<<<<<< HEAD
+=======
+// [ SEC_SELINUX_PORTING_COMMON
+#ifdef CONFIG_SECURITY_SELINUX_ALWAYS_ENFORCE
+		selinux_enabled = 1;
+#else
+>>>>>>> 5ba8cecbe... selinux: togglable selinux status
 		selinux_enabled = enabled ? 1 : 0;
 	return 1;
 }
@@ -6945,6 +6965,13 @@ static struct security_hook_list selinux_hooks[] __lsm_ro_after_init = {
 static __init int selinux_init(void)
 {
 	if (!security_module_enable("selinux")) {
+<<<<<<< HEAD
+=======
+// [ SEC_SELINUX_PORTING_COMMON
+#ifdef CONFIG_SECURITY_SELINUX_ALWAYS_ENFORCE
+		selinux_enabled = 1;
+#else
+>>>>>>> 5ba8cecbe... selinux: togglable selinux status
 		selinux_enabled = 0;
 		return 0;
 	}
@@ -6989,6 +7016,19 @@ static __init int selinux_init(void)
 	if (avc_add_callback(selinux_lsm_notifier_avc_callback, AVC_CALLBACK_RESET))
 		panic("SELinux: Unable to register AVC LSM notifier callback\n");
 
+<<<<<<< HEAD
+=======
+// [ SEC_SELINUX_PORTING_COMMON
+#ifdef CONFIG_SECURITY_SELINUX_ALWAYS_ENFORCE
+		selinux_enforcing_boot = 1;
+		selinux_enforcing = 1;
+#elif defined(CONFIG_SECURITY_SELINUX_ALWAYS_PERMISSIVE)
+		selinux_enforcing_boot = 0;
+		selinux_enforcing = 0;
+#endif
+// ] SEC_SELINUX_PORTING_COMMON
+
+>>>>>>> 5ba8cecbe... selinux: togglable selinux status
 	if (selinux_enforcing_boot)
 		printk(KERN_DEBUG "SELinux:  Starting in enforcing mode\n");
 	else
@@ -7078,7 +7118,15 @@ static struct pernet_operations selinux_net_ops = {
 static int __init selinux_nf_ip_init(void)
 {
 	int err;
+<<<<<<< HEAD
 
+=======
+// [ SEC_SELINUX_PORTING_COMMON
+#ifdef CONFIG_SECURITY_SELINUX_ALWAYS_ENFORCE
+		selinux_enabled = 1;
+#endif
+// ] SEC_SELINUX_PORTING_COMMON
+>>>>>>> 5ba8cecbe... selinux: togglable selinux status
 	if (!selinux_enabled)
 		return 0;
 

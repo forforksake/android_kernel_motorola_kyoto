@@ -238,6 +238,15 @@ static __init int sel_netport_init(void)
 {
 	int iter;
 
+<<<<<<< HEAD
+=======
+// [ SEC_SELINUX_PORTING_COMMON
+#ifdef CONFIG_SECURITY_SELINUX_ALWAYS_ENFORCE
+	selinux_enabled = 1;
+#endif
+// ] SEC_SELINUX_PORTING_COMMON
+
+>>>>>>> 5ba8cecbe... selinux: togglable selinux status
 	if (!selinux_enabled)
 		return 0;
 

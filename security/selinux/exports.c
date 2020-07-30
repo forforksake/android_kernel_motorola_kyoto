@@ -18,6 +18,13 @@
 
 bool selinux_is_enabled(void)
 {
+<<<<<<< HEAD
+=======
+// [ SEC_SELINUX_PORTING_COMMON
+#ifdef CONFIG_SECURITY_SELINUX_ALWAYS_ENFORCE
+	return true;
+#else
+>>>>>>> 5ba8cecbe... selinux: togglable selinux status
 	return selinux_enabled;
 }
 EXPORT_SYMBOL_GPL(selinux_is_enabled);

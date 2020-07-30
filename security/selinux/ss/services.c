@@ -750,7 +750,25 @@ out:
 	kfree(n);
 	kfree(t);
 
+<<<<<<< HEAD
 	if (!enforcing_enabled(state))
+=======
+// [ SEC_SELINUX_PORTING_COMMON
+#ifdef CONFIG_SECURITY_SELINUX_ALWAYS_ENFORCE
+#if (defined CONFIG_KDP_CRED && defined CONFIG_SAMSUNG_PRODUCT_SHIP)
+	enforcing_set(NULL, 1);
+#else
+	selinux_enforcing = 1;
+#endif
+#elif defined(CONFIG_SECURITY_SELINUX_ALWAYS_PERMISSIVE)
+#if (defined CONFIG_KDP_CRED && defined CONFIG_SAMSUNG_PRODUCT_SHIP)
+	enforcing_set(NULL, 0);
+#else
+	selinux_enforcing = 0;
+#endif
+#endif
+	if (!selinux_enforcing) // SEC_SELINUX_PORTING_COMMON Change to use RKP 
+>>>>>>> 5ba8cecbe... selinux: togglable selinux status
 		return 0;
 	return -EPERM;
 }
@@ -1637,7 +1655,25 @@ out:
 	kfree(s);
 	kfree(t);
 	kfree(n);
+<<<<<<< HEAD
 	if (!enforcing_enabled(state))
+=======
+// [ SEC_SELINUX_PORTING_COMMON
+#ifdef CONFIG_SECURITY_SELINUX_ALWAYS_ENFORCE
+#if (defined CONFIG_KDP_CRED && defined CONFIG_SAMSUNG_PRODUCT_SHIP)
+	enforcing_set(NULL, 1);
+#else
+	selinux_enforcing = 1;
+#endif
+#elif defined(CONFIG_SECURITY_SELINUX_ALWAYS_PERMISSIVE)
+#if (defined CONFIG_KDP_CRED && defined CONFIG_SAMSUNG_PRODUCT_SHIP)
+	enforcing_set(NULL, 0);
+#else
+	selinux_enforcing = 0;
+#endif
+#endif
+	if (!selinux_enforcing) // SEC_SELINUX_PORTING_COMMON Change to use RKP 
+>>>>>>> 5ba8cecbe... selinux: togglable selinux status
 		return 0;
 	return -EACCES;
 }
@@ -1935,7 +1971,25 @@ static inline int convert_context_handle_invalid_context(
 	char *s;
 	u32 len;
 
+<<<<<<< HEAD
 	if (enforcing_enabled(state))
+=======
+// [ SEC_SELINUX_PORTING_COMMON 
+#ifdef CONFIG_SECURITY_SELINUX_ALWAYS_ENFORCE
+#if (defined CONFIG_KDP_CRED && defined CONFIG_SAMSUNG_PRODUCT_SHIP)
+	enforcing_set(NULL, 1);
+#else
+	selinux_enforcing = 1;
+#endif
+#elif defined(CONFIG_SECURITY_SELINUX_ALWAYS_PERMISSIVE)
+#if (defined CONFIG_KDP_CRED && defined CONFIG_SAMSUNG_PRODUCT_SHIP)
+	enforcing_set(NULL, 0);
+#else
+	selinux_enforcing = 0;
+#endif
+#endif
+	if (!selinux_enforcing) // SEC_SELINUX_PORTING_COMMON Change to use RKP
+>>>>>>> 5ba8cecbe... selinux: togglable selinux status
 		return -EINVAL;
 
 	if (!context_struct_to_string(policydb, context, &s, &len)) {
